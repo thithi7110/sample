@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+</head>
+<body>
+
+<input id="btn" type="button" value="取得">
+<ul id="userlist">
+    <li>aaa</li>
+    <li>bbb</li>
+</ul>
+
+<script>
+    function aaa(){
+        //dom
+        let btn = document.getElementById("btn");
+        //イベント
+        btn.addEventListener("click",async function(){
+        	callApi();
+        });
+    }
+
+    async function callApi(){
+        let res = await fetch("http://localhost:8080/SampleServlet/Hello");
+        let data = await res.json();
+
+        let userList = document.getElementById("userlist");
+
+        data.forEach(row => {
+           userList.appendChild(row.id);
+        });
+    }
+</script>
+
+</body>
+</html>

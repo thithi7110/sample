@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="foo">
+    </div>
+    <div id="bar">
+    </div>
+    <input id="btn" type="button" value="ぼたん">
+    <ul id="userlist">
+
+    </ul>
+
+    <div id="jsonlist"></div>
+
+    <script>
+        window.document.getElementById("foo").innerText = "ふー";
+
+        window.document.getElementById("btn").addEventListener("click",function(){
+            //api呼び出し
+            callApi();
+        },false)
+
+    </script>
+
+    <script>
+        async function callApi(){
+	        	let res = await fetch("http://localhost:8080/SampleServlet/Hello");
+	            let data = await res.json();
+
+	            let userList = document.getElementById("userlist");
+
+	            data.forEach(row => {
+                    userList.innerHTML += "<li>"+row.id+":"+row.name+"</li>";
+	            });
+            }
+    </script>
+
+
+</body>
+</html>
